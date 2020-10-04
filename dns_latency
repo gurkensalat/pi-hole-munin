@@ -13,13 +13,13 @@ output_config() {
 
 output_values() {
     MEDIAN=$(grep -v `date '+%Y-%m-%d' --date="+24 hours"` /var/log/dnscrypt-proxy/query.log | grep [0-9][0-9]ms | cut -f 6 | tr -d ms | sort -n | awk ' { a[i++]=$1; } END { x=int((i+1)/2); if (x < (i+1)/2) print (a[x-1]+a[x])/2; else print a[x-1]; }')
-	  AVG=$(grep -v `date '+%Y-%m-%d' --date="+24 hours"` /var/log/dnscrypt-proxy/query.log | grep [0-9][0-9]ms | cut -f 6 | tr -d ms | sort -n | awk '{ total += $1; count++ } END { printf "%.0f",total/count }')
+    AVG=$(grep -v `date '+%Y-%m-%d' --date="+24 hours"` /var/log/dnscrypt-proxy/query.log | grep [0-9][0-9]ms | cut -f 6 | tr -d ms | sort -n | awk '{ total += $1; count++ } END { printf "%.0f",total/count }')
     printf "median.value $MEDIAN\n"
     printf "average.value $AVG\n"
 }
 
 output_usage() {
-    printf >&2 "%s - shows DNS latency of the last 24 hours\n" ${0##*/}
+    printf >&2 "%s - shows DNS latency within the last 24 hours\n" ${0##*/}
     printf >&2 "Usage: %s [config]\n" ${0##*/}
 }
 
