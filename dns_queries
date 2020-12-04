@@ -4,7 +4,7 @@ output_config() {
     echo "graph_category pi-hole"
     echo "graph_title DNS queries"
     echo "graph_vlabel DNS queries"
-    echo "graph_args --base 1000 -l 0"
+    echo "graph_args --base 1000 -l 0 --upper-limit 30000 --rigid"
     echo "graph_scale yes"
     echo "query.draw AREA"
     echo "query.label queries"
